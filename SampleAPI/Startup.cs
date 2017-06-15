@@ -37,8 +37,6 @@ namespace SampleAPI
             // Add framework services.
             services.AddMvc()
                 .AddControllersAsServices();
-
-            //return ConfigureIoC(services);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -52,30 +50,5 @@ namespace SampleAPI
             app.UseMvc();
 
         }
-
-        //public IServiceProvider ConfigureIoC(IServiceCollection services)
-        //{
-        //    var container = new Container();
-
-        //    container.Configure(config =>
-        //    {
-        //        // Register stuff in container, using the StructureMap APIs...
-        //        config.Scan(_ =>
-        //        {
-        //            _.AssembliesFromApplicationBaseDirectory();
-        //            _.WithDefaultConventions();
-        //            _.LookForRegistries();
-        //        });
-
-        //        config.For<IMediator>().Use<Mediator>();
-        //        config.For<SingleInstanceFactory>().Use<SingleInstanceFactory>(ctx => t => ctx.GetInstance(t));
-        //        config.For<MultiInstanceFactory>().Use<MultiInstanceFactory>(ctx => t => ctx.GetAllInstances(t));
-        //        //Populate the container using the service collection
-        //        config.Populate(services);
-        //    });
-
-        //    return container.GetInstance<IServiceProvider>();
-
-        //}
     }
 }
