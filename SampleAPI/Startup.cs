@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SampleAPI.Persistence.Inventory;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace SampleAPI
 {
@@ -28,7 +29,7 @@ namespace SampleAPI
         {
             services.AddDbContext<InventoryContext>(o =>
             {
-                o.UseInMemoryDatabase(Configuration.GetConnectionString("InventoryDb"));
+                o.UseInMemoryDatabase("InventoryDb");
             });
 
             services.AddCors();
@@ -37,18 +38,42 @@ namespace SampleAPI
             // Add framework services.
             services.AddMvc()
                 .AddControllersAsServices();
+
+            // Register the Swagger generator, defining one or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Sample API", Version = "v1" });
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole();
+            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                //seed in-memory database
+                var ctx = app.ApplicationServices.GetService<InventoryContext>();
+                ctx.Products.AddRange(InventorySeed.GetProducts());
+                ctx.Deals.AddRange(InventorySeed.GetDeals());
+                ctx.ProductDeals.AddRange(InventorySeed.GetProductDeals());
+                ctx.SaveChanges();
             }
 
             app.UseMvc();
 
+            app.UseStaticFiles();
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS etc.), specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sample API V1");
+            });
         }
     }
 }

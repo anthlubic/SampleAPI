@@ -14,6 +14,7 @@ namespace SampleAPI.Controllers
     {
         public DealsController(IMediator m) : base(m) {}
 
+        [HttpGet]
         public async Task<IActionResult> GetAsync()
         {
             var response = await Task.FromResult(new List<DealDto>());

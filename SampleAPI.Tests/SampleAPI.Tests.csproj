@@ -16,4 +16,15 @@
     <Folder Include="Services\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SampleAPI.Contract\SampleAPI.Contract.csproj" />
+    <ProjectReference Include="..\SampleAPI.Persistence\SampleAPI.Persistence.csproj" />
+    <ProjectReference Include="..\SampleAPI.Services\SampleAPI.Services.csproj" />
+    <ProjectReference Include="..\SampleAPI\SampleAPI.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
+  </ItemGroup>
+
 </Project>
