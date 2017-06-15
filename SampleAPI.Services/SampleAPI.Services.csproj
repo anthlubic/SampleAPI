@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="3.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SampleAPI.Contract\SampleAPI.Contract.csproj" />
+    <ProjectReference Include="..\SampleAPI.Persistence\SampleAPI.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>
