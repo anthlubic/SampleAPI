@@ -5,7 +5,7 @@ using MediatR;
 
 namespace SampleAPI.Contract.Products
 {
-    public class GetProductsWithoutDealsRequest : IRequest<GetProductsWithoutDealsResponse>
+    public class GetProductsWithoutDealsRequest : IRequest<IEnumerable<ProductDto>>
     {
         //public int CategoryId { get; set; }
     }

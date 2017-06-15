@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using SampleAPI.Persistence.Inventory;
 
 namespace SampleAPI
 {
@@ -27,17 +26,56 @@ namespace SampleAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<InventoryContext>(o =>
+            {
+                o.UseInMemoryDatabase(Configuration.GetConnectionString("InventoryDb"));
+            });
+
+            services.AddCors();
+            services.AddMediatR(typeof(Startup), typeof(Services.Registry.ServicesStructureMapRegistry));
+
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc()
+                .AddControllersAsServices();
+
+            //return ConfigureIoC(services);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+            loggerFactory.AddConsole();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
 
             app.UseMvc();
+
         }
+
+        //public IServiceProvider ConfigureIoC(IServiceCollection services)
+        //{
+        //    var container = new Container();
+
+        //    container.Configure(config =>
+        //    {
+        //        // Register stuff in container, using the StructureMap APIs...
+        //        config.Scan(_ =>
+        //        {
+        //            _.AssembliesFromApplicationBaseDirectory();
+        //            _.WithDefaultConventions();
+        //            _.LookForRegistries();
+        //        });
+
+        //        config.For<IMediator>().Use<Mediator>();
+        //        config.For<SingleInstanceFactory>().Use<SingleInstanceFactory>(ctx => t => ctx.GetInstance(t));
+        //        config.For<MultiInstanceFactory>().Use<MultiInstanceFactory>(ctx => t => ctx.GetAllInstances(t));
+        //        //Populate the container using the service collection
+        //        config.Populate(services);
+        //    });
+
+        //    return container.GetInstance<IServiceProvider>();
+
+        //}
     }
 }

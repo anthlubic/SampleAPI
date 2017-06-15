@@ -12,6 +12,6 @@ namespace SampleAPI.Contract.Deals
         public decimal PercentOff { get; set; }
         public decimal OriginalPrice { get; set; }
 
-        public decimal DealPrice => OriginalPrice * PercentOff;
+        public decimal DealPrice => OriginalPrice - OriginalPrice * PercentOff;
     }
 }
