@@ -25,7 +25,7 @@ namespace SampleAPI.Persistence.Inventory
                     ProductId = 2,
                     Name = "Coffee Maker",
                     Description = "Makes coffee.",
-                    Price = 39.99m
+                    Price = 40.00m
                 },
                 new Product
                 {
@@ -70,6 +70,20 @@ namespace SampleAPI.Persistence.Inventory
                     ProductId = 4,
                     DealId = 2,
                     IsActive = false
+                },
+                new ProductDeal
+                {
+                    ProductDealId = 3,
+                    ProductId = 2,
+                    DealId = 1,
+                    IsActive = true
+                },
+                new ProductDeal
+                {
+                    ProductDealId = 4,
+                    ProductId = 2,
+                    DealId = 3,
+                    IsActive = true
                 }
             };
 
@@ -84,14 +98,20 @@ namespace SampleAPI.Persistence.Inventory
                 new Deal
                 {
                     DealId = 1,
-                    Name = "10 Percent Off",
+                    Name = "10% Off",
                     PercentOff = 0.10m
                 },
                 new Deal
                 {
                     DealId = 2,
-                    Name = "25 Percent Off",
-                    PercentOff = 0.25m
+                    Name = "15% Off",
+                    PercentOff = 0.15m
+                },
+                new Deal
+                {
+                    DealId = 3,
+                    Name = "Clearance Sale! 30% Off",
+                    PercentOff = 0.30m
                 }
             };
 

@@ -17,7 +17,7 @@ namespace SampleAPI.Tests.Contract
                 PercentOff = 0.25m
             };
 
-            Assert.True(dealDto.DealPrice == 15.00m);
+            Assert.Equal(15.00m, dealDto.DealPrice);
         }
 
         [Fact(DisplayName = "DealDto - Deal Price has no rounding errors")]
@@ -29,7 +29,7 @@ namespace SampleAPI.Tests.Contract
                 PercentOff = 0.27m
             };
 
-            Assert.True(dealDto.DealPrice == 14.5927m);
+            Assert.Equal(14.5927m, dealDto.DealPrice);
         }
     }
 }

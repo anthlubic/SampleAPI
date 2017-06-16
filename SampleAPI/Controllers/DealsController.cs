@@ -18,7 +18,6 @@ namespace SampleAPI.Controllers
         public async Task<IActionResult> GetAsync()
         {
             var response = await Task.FromResult(new List<DealDto>());
-
             return BadRequest(response);
         }
 

@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\SampleAPI.Contract\SampleAPI.Contract.csproj" />
     <ProjectReference Include="..\SampleAPI.Persistence\SampleAPI.Persistence.csproj" />
     <ProjectReference Include="..\SampleAPI.Services\SampleAPI.Services.csproj" />
